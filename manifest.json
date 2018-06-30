@@ -1,0 +1,31 @@
+{
+    "name": "tabmarkers",
+    "version": "1.0",
+    "description": "tabmarkers",
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true 
+    },
+    "browser_action": {
+        "default_title": "salfdkj"
+    },
+    "permissions": [
+        "tabs",
+        "activeTab"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["contentScript.js"]
+        }
+    ],
+    "commands": {
+        "toggleColor1": {
+            "suggested_key": {
+                "default": "Alt+Shift+1"
+            },
+            "description": "Color 1"
+        }
+    },
+    "manifest_version": 2
+}

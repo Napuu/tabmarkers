@@ -12,7 +12,12 @@ function init(status) {
     }
 
     faviconDOM = document.querySelector("link[rel='icon']");
-    
+    let all = document.querySelectorAll("link[rel='icon']");
+    if (all.length > 1) {
+        for (var i = 1; i < all.length; i++) {
+            faviconDOM.parentNode.removeChild(all[i]); 
+        }
+    }
     // for some reason <link> element is found inside body->p in some pages ???
     if (faviconDOM != undefined && faviconDOM.parentNode.tagName != "HEAD") {
         faviconDOM.parentNode.removeChild(faviconDOM);

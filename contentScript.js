@@ -2,8 +2,6 @@
 
 getIconStatus(init);
 function init(status) {
-    let iconURL = "https://www.google.com/favicon.ico";
-
     let faviconDOM;
     let domain = "";
     let slashCount = 0;
@@ -14,6 +12,12 @@ function init(status) {
     }
 
     faviconDOM = document.querySelector("link[rel='icon']");
+    
+    // for some reason <link> element is found inside body->p in some pages ???
+    if (faviconDOM != undefined && faviconDOM.parentNode.tagName != "HEAD") {
+        faviconDOM.parentNode.removeChild(faviconDOM);
+        document.head.appendChild(faviconDOM);
+    }
     if (faviconDOM == undefined) faviconDOM = document.querySelector("link[rel='shortcut icon']");
     if (faviconDOM == undefined || faviconDOM == null) {
         faviconDOM = document.createElement("link");
@@ -34,17 +38,18 @@ function init(status) {
     img.crossOrigin = "Anonymous";
     img.crossorigin = "anonymous";
     img.src = faviconDOM.href;
-
+    console.log(img.src);
     if (!img.src.includes(domain) && !img.src.includes("base64")) {
-        // console.log("fetching");
+        console.log("fetching");
         let req = new Request(domain + "favicon.ico");
         fetch(req)
         .then(function(resp) {
-              return resp.blob();
+            return resp.blob();
         })
-        .then(function(blob) {
-              let dataURL = URL.createObjectURL(blob);
-              img.src = dataURL;
+        .then(function(blob) { 
+            console.log("datareceivedE#");
+            let dataURL = URL.createObjectURL(blob);
+            img.src = dataURL;
         });
     }
 
@@ -56,8 +61,6 @@ function init(status) {
     };
     function makeNewLayers(_img) {
         let canvas = document.createElement("canvas");
-        canvas.style.visible = false;
-        canvas.crossorigin = "use-credentials";
         canvas.style.position = "absolute";
         canvas.style.top = "0px";
         canvas.style.zIndex = "9999";

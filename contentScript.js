@@ -38,16 +38,16 @@ function init(status) {
     img.crossOrigin = "Anonymous";
     img.crossorigin = "anonymous";
     img.src = faviconDOM.href;
-    console.log(img.src);
+    // console.log(img.src);
     if (!img.src.includes(domain) && !img.src.includes("base64")) {
-        console.log("fetching");
+        // console.log("fetching");
         let req = new Request(domain + "favicon.ico");
         fetch(req)
         .then(function(resp) {
             return resp.blob();
         })
         .then(function(blob) { 
-            console.log("datareceivedE#");
+            // console.log("datareceivedE#");
             let dataURL = URL.createObjectURL(blob);
             img.src = dataURL;
         });

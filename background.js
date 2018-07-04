@@ -5,15 +5,15 @@ chrome.runtime.onMessage.addListener(
             let tabID = sender.tab.id;
             if (request.get) {
                 let tabStatus = iconStatuses[tabID];
-                console.log("tab status of " + tabID + ": " + tabStatus);
+                // console.log("tab status of " + tabID + ": " + tabStatus);
                 sendResponse({status: tabStatus});
             } else {
                 let tabStatus = request.status;
-                console.log("tab status of " + tabID + " set to " + tabStatus);
+                // console.log("tab status of " + tabID + " set to " + tabStatus);
                 iconStatuses[tabID] = tabStatus;
                 sendResponse({});
             }
-            console.log(iconStatuses);
+            // console.log(iconStatuses);
         }
     }
 );

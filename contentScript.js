@@ -1,4 +1,4 @@
-// console.log("content script attached");
+console.log("content script attached");
 let iconURL = "https://www.google.com/favicon.ico";
 
 let faviconDOM;
